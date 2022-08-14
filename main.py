@@ -35,13 +35,16 @@ def get_option():
     return opcion
 
 def top_retweeted(data):
-    top = ''
-    retweeted_count = 0
+    count_retweeted = {}
 
     for tweet in data:
-        if tweet['retweetedCount'] > retweeted_count:
-            top = tweet['content']
-            retweeted_count = tweet['retweetedCount']
+
+        count_retweeted[tweet['content']] = tweet['retweetCount']
+
+    top_retweeted = sorted(count_retweeted.items(), key=lambda x: x[1], reverse=True)
+
+    for i in range(10):
+        print(top_retweeted[i])
 
 def top_usuarios(data):
     users_count = {}
@@ -62,10 +65,44 @@ def top_usuarios(data):
         print(top_users[i])
 
 def top_dias(data):
-    pass
+    days_count = {}
+
+    for tweet in data:
+
+        # Sumamos si ya esta
+        if tweet['date'][:10] in list(days_count.keys()):
+            days_count[tweet['date'][:10]] += 1
+        else:
+            days_count[tweet['date'][:10]] = 1
+
+    # Ordenamos
+    top_days = sorted(days_count.items(), key=lambda x: x[1], reverse=True)
+
+    # Entregamos el top ten
+    for i in range(10):
+        print(top_days[i])
+
 
 def top_hashtags(data):
-    pass
+    
+    hashtag_count = {}
+
+    for tweet in data:
+
+        contenido = tweet['content']
+        palabras = contenido.split(' ')
+
+        for plb in palabras:
+            if plb[0] == '#':
+                if plb in list(hashtag_count.keys()):
+                    hashtag_count[plb] += 1
+                else:
+                    hashtag_count[plb] = 1
+        
+    top_hashtags = sorted(hashtag_count.items(), key=lambda x: x[1], reverse=True)
+
+    for i in range(10):
+        print(top_hashtags[i])
 
 if __name__ == '__main__':
     main()
