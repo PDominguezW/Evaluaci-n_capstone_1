@@ -1,0 +1,2 @@
+- Me tarde en subir el contenido a este repositorio dado que el internet en el lugar donde me ubico no es bueno. Para subir el archivo de 200mb utilize Github lfs.
+- Como este repositorio es un proyecto simple de una sola persona, no me parecio necesario crear una branch de develop, por lo que escribi y subi el codigo en una sola branch.
